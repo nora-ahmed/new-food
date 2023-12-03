@@ -143,6 +143,39 @@ class mainMenu{
             }
         }
     }
+    public void searchByCategory() {
+        System.out.println("Please enter the category number:");
+        for (int i = 0; i < 3; i++) {
+            System.out.println((i + 1) + ") Category: " + Main.r[i].getCategory());
+        }
+
+        Scanner scanner = new Scanner(System.in);
+        int categoryChoice = scanner.nextInt();
+
+        boolean flag = false;
+        for (int i = 0; i < 3; i++) {
+            if (categoryChoice == i + 1) {
+                flag = true;
+                Main.r[i].displayMenu();
+
+                while (true) {
+                    System.out.println("Please enter your choice: 1-5 or enter 0 to go back:");
+                    int dishChoice = scanner.nextInt();
+                    if (dishChoice == 0) {
+                        break;
+                    } else if (dishChoice >= 1 && dishChoice <= 5) {
+                        Dish d = Main.r[i].getDish(dishChoice - 1);
+                        CartItem ci = new CartItem(d, 5);
+                        Main.c.addItem(ci);
+                    }
+                }
+            }
+        }
+
+        if (!flag) {
+            System.out.println("Invalid category choice. Please try again.");
+        }
+    }
     public void search() {
         while(true) {
             System.out.println("Please enter you choice:");
@@ -182,7 +215,12 @@ class mainMenu{
                     break;
                 }
             }
-            if (searchChoice == 3) {
+            else if(searchChoice==2){
+                searchByCategory();
+            }
+
+
+            else if (searchChoice == 3) {
                 break;
             }
         }
@@ -353,11 +391,11 @@ static List <User> user =new ArrayList<>();
         Dish d=new Dish("ldldl",30,"dkdkk");
         m.addDish(d);
         for (int i=1;i<3;i++){
-            r[i]=new Restaurant("fkkfkf","jhfhdfkj","fhjfkhkd", 4.5F,m);
+            r[i]=new Restaurant("fkkfkf","jhfhdfkj","chineese","fhjfkhkd", 4.5F,m);
         }
 
 
-        r[0]=new Restaurant("Nora","nora","nora",3.5F,v);
+        r[0]=new Restaurant("Nora","nora","American","nora",3.5F,v);
         Dish b=new Dish("Pizza",30,"sssss");
         v.addDish(b);
         for(int i=1;i<5;i++){
