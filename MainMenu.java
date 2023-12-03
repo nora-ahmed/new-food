@@ -2,12 +2,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+
 // nora حلوة
 // jjjjjjjjjjjjjj
-class mainMenu
-{
+//عحبك نبنبنبنبنبنب
+class mainMenu {
     public void displayMainMenu() throws InterruptedException {
-        while(true) {
+        while (true) {
             int choice;
             Scanner scanner = new Scanner(System.in);
             System.out.println("Please enter you choice:");
@@ -29,7 +30,7 @@ class mainMenu
                 //place order
 
             } else if (choice == 4) {
-                Main.thisUser=-1;
+                Main.thisUser = -1;
                 break;
             } else {
                 System.out.println("Invalid choice, Please try Again.");
@@ -37,7 +38,8 @@ class mainMenu
             }
         }
     }
-    public void displayRestaurants(){
+
+    public void displayRestaurants() {
 
         for (int i = 0; i < 3; i++) {
             System.out.println((i + 1) + ") Restaurant: " + Main.r[i].getName());
@@ -69,10 +71,10 @@ class mainMenu
         }
 
     }
+
     public void viewCart() throws InterruptedException {
         Main.c.display();
-        while (true)
-        {
+        while (true) {
             System.out.println("Please enter your choice:");
             System.out.println("1) Edit your order.");
             System.out.println("2) Place your order.");
@@ -94,8 +96,7 @@ class mainMenu
 
                     } else if (cusChoice == 2) {
                         break;
-                    }
-                     else if (cusChoice == 3) {
+                    } else if (cusChoice == 3) {
                         System.out.println("Please enter the item's name you want to delete:");
                         String itemName;
                         Scanner scanner2 = new Scanner(System.in);
@@ -106,8 +107,7 @@ class mainMenu
                     }
 
                 }
-            }
-            else if (cartChoice == 2) {
+            } else if (cartChoice == 2) {
                 // Process payment
                 Payment payment = new Payment(Main.c.getTotalPrice());
                 payment.processPayment();
@@ -115,36 +115,35 @@ class mainMenu
                 // Check if the payment was successful
                 if (payment.getPaymentStatus()) {
                     // Create the order
-                     Main.thisUser=-1;
-                    for (int i=0;i<User.numberOfUser;i++){
-                        if(Main.user.get(i).getLogged()){
-                            Main.thisUser=i;
+                    Main.thisUser = -1;
+                    for (int i = 0; i < User.numberOfUser; i++) {
+                        if (Main.user.get(i).getLogged()) {
+                            Main.thisUser = i;
                             break;
                         }
                     }
-                    Order order = new Order( Main.c, Main.user.get(Main.thisUser), Main.r[0], payment);
+                    Order order = new Order(Main.c, Main.user.get(Main.thisUser), Main.r[0], payment);
                     order.Preferred_DeliveryTime();
                     int orderTime = 2 * 60; // Convert minutes to seconds
                     OrderTimer orderTimer = new OrderTimer(orderTime);
                     orderTimer.startTimer();
                     order.DisplayOrder();
-                   TimeUnit.MINUTES.sleep(2);
-                Review r=new Review(Main.user.get(Main.thisUser));
-                r.getReview();
-                r.display();
+                    TimeUnit.MINUTES.sleep(2);
+                    Review r = new Review(Main.user.get(Main.thisUser));
+                    r.getReview();
+                    r.display();
                     break;
 
 
                 } else {
                     System.out.println("Payment failed. Please try again.");
                 }
-            }
-
-            else if (cartChoice == 3) {
+            } else if (cartChoice == 3) {
                 break;
             }
         }
     }
+
     public void searchByCategory() {
         System.out.println("Please enter the category number:");
         for (int i = 0; i < 3; i++) {
@@ -178,8 +177,9 @@ class mainMenu
             System.out.println("Invalid category choice. Please try again.");
         }
     }
+
     public void search() {
-        while(true) {
+        while (true) {
             System.out.println("Please enter you choice:");
             System.out.println("1) Search by restaurant name.");
             System.out.println("2) Search by restaurant category.");
@@ -216,17 +216,14 @@ class mainMenu
                     System.out.println("Sorry, we don't have this restaurant.");
                     break;
                 }
-            }
-            else if(searchChoice==2){
+            } else if (searchChoice == 2) {
                 searchByCategory();
-            }
-
-
-            else if (searchChoice == 3) {
+            } else if (searchChoice == 3) {
                 break;
             }
         }
     }
+
     public void WelcomePage() throws InterruptedException {
 
         Scanner read = new Scanner(System.in);
@@ -254,19 +251,17 @@ class mainMenu
 
             option = read.nextInt();
 
-            switch (option)
-            {
-                case 1:{
+            switch (option) {
+                case 1: {
 
-                   User u= new User();
+                    User u = new User();
 
                     System.out.println("Enter your username");
                     String username = read.next();
 
-                    for (int i  = 0 ; i < index ; i++){
+                    for (int i = 0; i < index; i++) {
 
-                        if (username.equals(Main.user.get(i).getUserName()))
-                        {
+                        if (username.equals(Main.user.get(i).getUserName())) {
                             System.out.println("username already exists");
 
                             checkRegistration = true;
@@ -276,7 +271,7 @@ class mainMenu
 
                     }
 
-                    if(checkRegistration){
+                    if (checkRegistration) {
 
                         state = true;
 
@@ -287,10 +282,9 @@ class mainMenu
                     System.out.println("Enter your Email");
                     String email = read.next();
 
-                    for (int i  = 0 ; i < index ; i++){
+                    for (int i = 0; i < index; i++) {
 
-                        if (email.equals(Main.user.get(i).getEmail()))
-                        {
+                        if (email.equals(Main.user.get(i).getEmail())) {
                             System.out.println("email already exists");
 
                             checkRegistration = true;
@@ -300,7 +294,7 @@ class mainMenu
 
                     }
 
-                    if(checkRegistration){
+                    if (checkRegistration) {
 
                         state = true;
 
@@ -314,8 +308,7 @@ class mainMenu
 
                     System.out.println("Enter your Delivery Address");
                     String deliveryAddress = read.nextLine();
-                   u.setDeliveryAddress(deliveryAddress);
-
+                    u.setDeliveryAddress(deliveryAddress);
 
 
                     System.out.println("Enter your Password");
@@ -330,22 +323,21 @@ class mainMenu
 
                     break;
                 }
-                case 2:{
+                case 2: {
                     System.out.println("Enter your User Name");
                     String username = read.next();
 
                     System.out.println("Enter your Password");
                     String password = read.next();
 
-                    for (int i  = 0 ; i < index ; i++ ){
+                    for (int i = 0; i < index; i++) {
 
-                        if(username.equals(Main.user.get(i).getUserName()) && password.equals(Main.user.get(i).getPassword()) ){
+                        if (username.equals(Main.user.get(i).getUserName()) && password.equals(Main.user.get(i).getPassword())) {
 
                             System.out.println("login successfully");
-Main.user.get(i).setLogged();
+                            Main.user.get(i).setLogged();
                             checkLogin = true;
                             this.displayMainMenu();
-
 
 
                         }
@@ -353,8 +345,7 @@ Main.user.get(i).setLogged();
 
                     //checkLogin = true;
 
-                    if(!checkLogin)
-                    {
+                    if (!checkLogin) {
                         System.out.println("invalid userName or password");
                     }
 
@@ -363,14 +354,12 @@ Main.user.get(i).setLogged();
 
                     break;
                 }
-                case 0:
-                {
+                case 0: {
                     state = false;
 
                     break;
                 }
-                default:
-                {
+                default: {
                     System.out.println("Invalid Option");
 
                     state = true;
@@ -379,33 +368,35 @@ Main.user.get(i).setLogged();
         } while (state);
     }
 }
+
 class Main {
 
-    static Restaurant r[]=new Restaurant[3] ;
+    static Restaurant r[] = new Restaurant[3];
     static User u = new User();
-    static Menu m=new Menu();
-    static Menu v=new Menu();
+    static Menu m = new Menu();
+    static Menu v = new Menu();
     static User farah = new User();
     static int thisUser;
-static List <User> user =new ArrayList<>();
-    static Cart c=new Cart();
+    static List<User> user = new ArrayList<>();
+    static Cart c = new Cart();
+
     public static void main(String[] args) throws InterruptedException {
-        Dish d=new Dish("ldldl",30,"dkdkk");
+        Dish d = new Dish("ldldl", 30, "dkdkk");
         m.addDish(d);
-        for (int i=1;i<3;i++){
-            r[i]=new Restaurant("fkkfkf","jhfhdfkj","chineese","fhjfkhkd", 4.5F,m);
+        for (int i = 1; i < 3; i++) {
+            r[i] = new Restaurant("fkkfkf", "jhfhdfkj", "chineese", "fhjfkhkd", 4.5F, m);
         }
 
 
-        r[0]=new Restaurant("Nora","nora","American","nora",3.5F,v);
-        Dish b=new Dish("Pizza",30,"sssss");
+        r[0] = new Restaurant("Nora", "nora", "American", "nora", 3.5F, v);
+        Dish b = new Dish("Pizza", 30, "sssss");
         v.addDish(b);
-        for(int i=1;i<5;i++){
-            Dish m=new Dish("Burger",50,"fries");
+        for (int i = 1; i < 5; i++) {
+            Dish m = new Dish("Burger", 50, "fries");
             v.addDish(m);
         }
 
-        mainMenu j=new mainMenu();
+        mainMenu j = new mainMenu();
         j.WelcomePage();
 
 
