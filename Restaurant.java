@@ -7,6 +7,7 @@ public class Restaurant {
     private float ratings;
     private Menu menu;
 
+
     public Restaurant(String name, String address, String category, String contactInfo, float ratings, Menu menu) {
         this.name = name;
         this.address = address;
