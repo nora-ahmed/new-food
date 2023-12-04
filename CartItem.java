@@ -1,14 +1,15 @@
-import java.util.Scanner;
 class CartItem {
 
     private Dish dish;
-    private int quantity;
+    protected int quantity;
+    private final float CUSTOMIZATION_PRICE = 5.0f;
+    private boolean[] customizations;  // New: Array of booleans to represent customizations
 
     public CartItem(Dish dish, int quantity) {
         this.dish = dish;
         this.quantity = quantity;
+        this.customizations = new boolean[3];
     }
-
     public Dish getDish() {
         return this.dish;
     }
@@ -24,20 +25,21 @@ class CartItem {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    public boolean[] getCustomizations() {
+        return customizations;
+    }
+    public void customize(int customizationIndex) {
+        // Set the selected customization to true
+        if (customizationIndex >= 0 && customizationIndex < customizations.length) {
+            customizations[customizationIndex] = true;
+            // Increase the total price for each customization
+            this.dish.setPrice(this.dish.getPrice() + CUSTOMIZATION_PRICE);
+        }
+    }
+
 
     public double getPrice() {
         return this.dish.getPrice();
     }
 
-    public void customize() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Customize the dish: " + this.dish.getName());
-        // Add your customization logic here
-        // For example, ask the user for additional toppings, sides, etc.
-    }
-
-    public void display() {
-        dish.display();
-        System.out.println("Quantity: " + this.quantity);
-    }
 }
