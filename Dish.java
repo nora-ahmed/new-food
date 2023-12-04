@@ -46,7 +46,7 @@ public class Dish {
     public float getPrice() {
         return price;
     }
-
+// why commenting it??
     /*public String getDescription() {
         return description;
     }*/
