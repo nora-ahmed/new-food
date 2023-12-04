@@ -2,72 +2,105 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
+import java.util.InputMismatchException;
 class mainMenu {
-    //hello
-    //ههخخخخحح
     public void displayMainMenu() throws InterruptedException {
+
         while (true) {
             int choice;
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Please enter you choice:");
+            System.out.println("Please enter your choice:");
             System.out.println("1) Display all restaurants.");
             System.out.println("2) Search.");
             System.out.println("3) View cart.");
             System.out.println("4) Log out.");
-            choice = scanner.nextInt();
-            if (choice == 1) {
-                displayRestaurants();
 
-            } else if (choice == 2) {
-                search();
-            } else if (choice == 3) {
-                this.viewCart();
-                //display cart
-                //custom
-                //edit:quantity delete
-                //place order
+            try {
+                choice = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // Clear the invalid input by consuming the entire line
+                continue; // Continue the loop
+            }
 
-            } else if (choice == 4) {
-                Main.thisUser = -1;
-                break;
-            } else {
-                System.out.println("Invalid choice, Please try Again.");
-
+            switch (choice) {
+                case 1:
+                    displayRestaurants();
+                    break;
+                case 2:
+                    search();
+                    break;
+                case 3:
+                    this.viewCart();
+                    // Display cart
+                    // Custom
+                    // Edit: quantity delete
+                    // Place order
+                    break;
+                case 4:
+                    Main.thisUser = -1;
+                    return;
+                default:
+                    System.out.println("Invalid choice. Please try again.");
             }
         }
     }
 
     public void displayRestaurants() {
+        Scanner resScanner = new Scanner(System.in);
 
         for (int i = 0; i < 3; i++) {
             System.out.println((i + 1) + ") Restaurant: " + Main.r[i].getName());
             System.out.println("Rating: " + Main.r[i].getRatings());
-
         }
-        Scanner resScanner = new Scanner(System.in);
 
         System.out.println("Please enter your choice: 1-3:");
 
+        int resChoice;
 
-        int resChoice = resScanner.nextInt();
+        while (true) {
+            try {
+                resChoice = resScanner.nextInt();
+                if (resChoice >= 1 && resChoice <= 3) {
+                    break;
+                } else {
+                    System.out.println("Invalid choice. Please enter a number between 1 and 3.");
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                resScanner.nextLine(); // Clear the invalid input by consuming the entire line
+            }
+        }
 
         Main.r[(resChoice - 1)].displayMenu();
 
         while (true) {
-
             System.out.println("Please enter your choice: 1-5 or enter 0 to go back:");
-            int dishChoice = resScanner.nextInt();
+
+            int dishChoice;
+
+            while (true) {
+                try {
+                    dishChoice = resScanner.nextInt();
+                    if (dishChoice >= 0 && dishChoice <= 5) {
+                        break;
+                    } else {
+                        System.out.println("Invalid choice. Please enter a number between 0 and 5.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a valid integer.");
+                    resScanner.nextLine(); // Clear the invalid input by consuming the entire line
+                }
+            }
+
             if (dishChoice == 0) {
                 break;
             } else if (dishChoice >= 1 && dishChoice <= 5) {
                 Dish d = Main.r[(resChoice - 1)].getDish(dishChoice - 1);
                 CartItem ci = new CartItem(d, 1);
                 Main.c.addItem(ci);
-
             }
-
         }
-
     }
 
     public void viewCart() throws InterruptedException {
@@ -78,7 +111,14 @@ class mainMenu {
             System.out.println("2) Place your order.");
             System.out.println("3) Go back.");
             Scanner scanner = new Scanner(System.in);
-            int cartChoice = scanner.nextInt();
+            int cartChoice;
+            try {
+                cartChoice = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // Clear the invalid input by consuming the entire line
+                continue; // Continue the loop
+            }
 
             if (cartChoice == 1) {
                 while (true) {
@@ -88,7 +128,16 @@ class mainMenu {
                     System.out.println("3) Delete an item.");
                     System.out.println("4) Go back");
                     Scanner scanner1 = new Scanner(System.in);
-                    int cusChoice = scanner1.nextInt();
+                    int cusChoice;
+
+                    try {
+                        cusChoice = scanner1.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input. Please enter a valid integer.");
+                        scanner1.nextLine(); // Clear the invalid input by consuming the entire line
+                        continue; // Continue the loop
+                    }
+
                     if (cusChoice == 1) {
                         break;
 
@@ -144,14 +193,24 @@ class mainMenu {
 
     public void searchByCategory() {
         System.out.println("Please enter the category number:");
+
         for (int i = 0; i < 3; i++) {
             System.out.println((i + 1) + ") Category: " + Main.r[i].getCategory());
         }
 
         Scanner scanner = new Scanner(System.in);
-        int categoryChoice = scanner.nextInt();
+
+        int categoryChoice;
+        try {
+            categoryChoice = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a valid integer.");
+            scanner.nextLine(); // Clear the invalid input by consuming the entire line
+            return;
+        }
 
         boolean flag = false;
+
         for (int i = 0; i < 3; i++) {
             if (categoryChoice == i + 1) {
                 flag = true;
@@ -159,7 +218,17 @@ class mainMenu {
 
                 while (true) {
                     System.out.println("Please enter your choice: 1-5 or enter 0 to go back:");
-                    int dishChoice = scanner.nextInt();
+
+                    int dishChoice;
+
+                    try {
+                        dishChoice = scanner.nextInt();
+                    } catch (InputMismatchException e) {
+                        System.out.println("Invalid input. Please enter a valid integer.");
+                        scanner.nextLine(); // Clear the invalid input by consuming the entire line
+                        continue; // Continue the loop
+                    }
+
                     if (dishChoice == 0) {
                         break;
                     } else if (dishChoice >= 1 && dishChoice <= 5) {
@@ -178,17 +247,30 @@ class mainMenu {
 
     public void search() {
         while (true) {
-            System.out.println("Please enter you choice:");
+            System.out.println("Please enter your choice:");
             System.out.println("1) Search by restaurant name.");
             System.out.println("2) Search by restaurant category.");
             System.out.println("3) Go back.");
+
             Scanner scanner = new Scanner(System.in);
-            int searchChoice = scanner.nextInt();
+
+            int searchChoice;
+
+            try {
+                searchChoice = scanner.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine(); // Clear the invalid input by consuming the entire line
+                continue; // Continue the loop
+            }
+
             if (searchChoice == 1) {
                 System.out.println("Please enter the restaurant name:");
+
                 Scanner scanner1 = new Scanner(System.in);
                 String resName = scanner1.next();
                 boolean flag = false;
+
                 for (int i = 0; i < 3; i++) {
                     if (resName.equals(Main.r[i].getName())) {
                         flag = true;
@@ -196,20 +278,30 @@ class mainMenu {
 
                         while (true) {
                             System.out.println("Please enter your choice: 1-5 or enter 0 to go back:");
+
                             Scanner scanner2 = new Scanner(System.in);
-                            int dishChoice = scanner2.nextInt();
+
+                            int dishChoice;
+
+                            try {
+                                dishChoice = scanner2.nextInt();
+                            } catch (InputMismatchException e) {
+                                System.out.println("Invalid input. Please enter a valid integer.");
+                                scanner2.nextLine(); // Clear the invalid input by consuming the entire line
+                                continue; // Continue the loop
+                            }
+
                             if (dishChoice == 0) {
                                 break;
-
                             } else if (dishChoice >= 1 && dishChoice <= 5) {
                                 Dish d = Main.r[i].getDish(dishChoice - 1);
                                 CartItem ci = new CartItem(d, 5);
                                 Main.c.addItem(ci);
                             }
                         }
-
                     }
                 }
+
                 if (!flag) {
                     System.out.println("Sorry, we don't have this restaurant.");
                     break;
@@ -230,7 +322,7 @@ class mainMenu {
         boolean state = false;
         do {
 
-            int option;
+            int option=0;
 
             boolean checkRegistration = false;
 
@@ -245,9 +337,14 @@ class mainMenu {
             System.out.println("press 2 to login");
 
             System.out.println("press 0 to close the program");
+            try {
+                option = read.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                read.nextLine(); // Clear the invalid input by consuming the entire line
+                WelcomePage();
+            }
 
-
-            option = read.nextInt();
 
             switch (option) {
                 case 1: {
