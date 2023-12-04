@@ -20,8 +20,8 @@ class mainMenu {
                 choice = scanner.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
-                scanner.nextLine(); // Clear the invalid input by consuming the entire line
-                continue; // Continue the loop
+                scanner.nextLine(); // Clear invalid input
+                continue;
             }
 
             switch (choice) {
@@ -69,7 +69,7 @@ class mainMenu {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
-                resScanner.nextLine(); // Clear the invalid input by consuming the entire line
+                resScanner.nextLine(); // Clear the invalid input
             }
         }
 
@@ -90,7 +90,7 @@ class mainMenu {
                     }
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input. Please enter a valid integer.");
-                    resScanner.nextLine(); // Clear the invalid input by consuming the entire line
+                    resScanner.nextLine(); // Clear the invalid input
                 }
             }
 
@@ -117,7 +117,7 @@ class mainMenu {
                 cartChoice = scanner.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
-                scanner.nextLine(); // Clear the invalid input by consuming the entire line
+                scanner.nextLine(); // Clear the invalid input
                 continue; // Continue the loop
             }
 
@@ -135,8 +135,8 @@ class mainMenu {
                         cusChoice = scanner1.nextInt();
                     } catch (InputMismatchException e) {
                         System.out.println("Invalid input. Please enter a valid integer.");
-                        scanner1.nextLine(); // Clear the invalid input by consuming the entire line
-                        continue; // Continue the loop
+                        scanner1.nextLine(); // Clear the invalid input
+                        continue;
                     }
 
                     if (cusChoice == 1) {
@@ -206,7 +206,7 @@ class mainMenu {
             categoryChoice = scanner.nextInt();
         } catch (InputMismatchException e) {
             System.out.println("Invalid input. Please enter a valid integer.");
-            scanner.nextLine(); // Clear the invalid input by consuming the entire line
+            scanner.nextLine(); // Clear the invalid input
             return;
         }
 
@@ -226,8 +226,8 @@ class mainMenu {
                         dishChoice = scanner.nextInt();
                     } catch (InputMismatchException e) {
                         System.out.println("Invalid input. Please enter a valid integer.");
-                        scanner.nextLine(); // Clear the invalid input by consuming the entire line
-                        continue; // Continue the loop
+                        scanner.nextLine(); // Clear the invalid input
+                        continue;
                     }
 
                     if (dishChoice == 0) {
@@ -261,8 +261,8 @@ class mainMenu {
                 searchChoice = scanner.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
-                scanner.nextLine(); // Clear the invalid input by consuming the entire line
-                continue; // Continue the loop
+                scanner.nextLine(); // Clear the invalid input
+                continue;
             }
 
             if (searchChoice == 1) {
@@ -288,8 +288,8 @@ class mainMenu {
                                 dishChoice = scanner2.nextInt();
                             } catch (InputMismatchException e) {
                                 System.out.println("Invalid input. Please enter a valid integer.");
-                                scanner2.nextLine(); // Clear the invalid input by consuming the entire line
-                                continue; // Continue the loop
+                                scanner2.nextLine(); // Clear the invalid input
+                                continue;
                             }
 
                             if (dishChoice == 0) {
@@ -342,7 +342,7 @@ class mainMenu {
                 option = read.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a valid integer.");
-                read.nextLine(); // Clear the invalid input by consuming the entire line
+                read.nextLine(); // Clear the invalid input
                 WelcomePage();
             }
 
