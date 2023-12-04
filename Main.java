@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 //hiiiii
 //yufyfyufyuf
 class mainMenu {
-    //menna
+    //hello
     public void displayMainMenu() throws InterruptedException {
         while (true) {
             int choice;
