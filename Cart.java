@@ -56,4 +56,9 @@ class Cart {
             super(message);
         }
     }
+     public void emptyCart() {
+        this.items.clear(); 
+        System.out.println("Your cart is now empty");
+     }
+
 }
