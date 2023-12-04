@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -365,7 +366,96 @@ class mainMenu {
             }
         } while (state);
     }
+
+    public void AdminDashboard()
+    {
+        Admin admin1 = new Admin();
+        Scanner scanner = new Scanner(System.in);
+        boolean exitRequested = false;
+
+        do {
+            System.out.println("1. Add Dish to Menu");
+            System.out.println("2. Remove Dish from Menu");
+            System.out.println("3. Update Dish Price");
+            System.out.println("4. View Menu");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+
+            int choice = getValidIntegerInput(scanner);
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter dish name: ");
+                    String dishName = scanner.nextLine();
+                    System.out.println("Enter dish price: ");
+                    float dishPrice = getValidFloatInput(scanner);
+                    System.out.print("Enter dish description: ");
+                    String dishDescription = scanner.nextLine();
+                    Dish newDish = new Dish(dishName, dishPrice, dishDescription);
+                    admin1.addDishToMenu(newDish);
+                    break;
+
+                case 2:
+                    System.out.print("Enter dish name to remove: ");
+                    String dishToRemove = scanner.nextLine();
+                    Dish dish = new Dish(dishToRemove);
+                    admin1.removeDishFromMenu(dish);
+                    break;
+
+                case 3:
+                    System.out.print("Enter dish name to update price: ");
+                    String dishToUpdate = scanner.nextLine();
+                    Dish dishToUpdateObj = new Dish(dishToUpdate);
+                    System.out.print("Enter new dish price: ");
+                    float newPrice = getValidFloatInput(scanner);
+                    admin1.updateDishPrice(dishToUpdateObj, newPrice);
+                    break;
+
+                case 4:
+                    admin1.viewMenu();
+                    break;
+
+                case 5:
+                    System.out.println("Exiting the program. Goodbye!");
+                    exitRequested = true;
+                    break;
+
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+            }
+
+        }while (!exitRequested);
+    }
+
+    private static float getValidFloatInput(Scanner scanner) {
+        float value;
+        while (true) {
+            try {
+                value = Float.parseFloat(scanner.nextLine());
+                break;
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a valid float.");
+            }
+        }
+        return value;
+    }
+
+    private static int getValidIntegerInput(Scanner scanner) {
+        int value;
+        while (true) {
+            try {
+                value = scanner.nextInt();
+                scanner.nextLine();
+                break;
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine();
+            }
+        }
+        return value;
+    }
 }
+
 
 class Main {
 
