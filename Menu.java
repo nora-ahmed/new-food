@@ -1,13 +1,14 @@
 import java.util.ArrayList;
+import java.util.List;
 
 public class Menu {
     private ArrayList<Dish> menuItems;
+
     public Menu() {
         this.menuItems = new ArrayList<Dish>();
     }
 
-    public void addDish(Dish menuItem)
-    {
+    public void addDish(Dish menuItem) {
         menuItems.add(menuItem);
     }
 
@@ -21,13 +22,17 @@ public class Menu {
     }
 
     public void displayMenu() {
-        for (int i = 0; i < menuItems.size(); i++)
-        {
+        for (int i = 0; i < menuItems.size(); i++) {
             System.out.print((i + 1) + ". ");
             menuItems.get(i).display();
         }
     }
-    public Dish getDish(int num){
+
+    public Dish getDish(int num) {
         return menuItems.get(num);
+    }
+
+    public List<Dish> getDishes() {
+        return menuItems;
     }
 }
