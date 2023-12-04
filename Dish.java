@@ -5,20 +5,10 @@ public class Dish {
     private float price;
     private String description;
     private Boolean combo=false,extraSalad=false,water=false;
-    public Dish(String name,float price,String description){
+    Dish(String name,float price,String description){
         this.name=name;
         this.price=price;
         this.description=description;
-    }
-
-    public Dish (String name, float price)
-    {
-        this.name=name;
-        this.price=price;
-    }
-    public Dish (String name)
-    {
-        this.name=name;
     }
     public void customization(){
         Scanner scanner=new Scanner(System.in);
