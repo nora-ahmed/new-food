@@ -10,38 +10,38 @@ public class Dish {
         this.price=price;
         this.description=description;
     }
-    public void customization(){
-        Scanner scanner=new Scanner(System.in);
-        char choice;
-        System.out.println("Pay extra $5 and make it a combo? Y/N");
-        choice=scanner.next().charAt(0);
-        if (choice=='Y'||choice=='y'){
-            this.combo=true;
-        }
-        System.out.println("Do you want extra salad for $3 ? Y/N");
-        choice=scanner.next().charAt(0);
-        if (choice=='Y'||choice=='y'){
-            this.extraSalad=true;
-        }
-        System.out.println("Add water for $1 ? Y/N");
-        choice=scanner.next().charAt(0);
-        if (choice=='Y'||choice=='y'){
-            this.water=true;
+    // public void customization(){
+    //     Scanner scanner=new Scanner(System.in);
+    //     char choice;
+    //     System.out.println("Pay extra $5 and make it a combo? Y/N");
+    //     choice=scanner.next().charAt(0);
+    //     if (choice=='Y'||choice=='y'){
+    //         this.combo=true;
+    //     }
+    //     System.out.println("Do you want extra salad for $3 ? Y/N");
+    //     choice=scanner.next().charAt(0);
+    //     if (choice=='Y'||choice=='y'){
+    //         this.extraSalad=true;
+    //     }
+    //     System.out.println("Add water for $1 ? Y/N");
+    //     choice=scanner.next().charAt(0);
+    //     if (choice=='Y'||choice=='y'){
+    //         this.water=true;
 
-        }
-    }
+    //     }
+    // }
 
-    public Boolean getCombo() {
-        return combo;
-    }
+    // public Boolean getCombo() {
+    //     return combo;
+    // }
 
-    public Boolean getExtraSalad() {
-        return extraSalad;
-    }
+    // public Boolean getExtraSalad() {
+    //     return extraSalad;
+    // }
 
-    public Boolean getWater() {
-        return water;
-    }
+    // public Boolean getWater() {
+    //     return water;
+    // }
 
     public float getPrice() {
         return price;
