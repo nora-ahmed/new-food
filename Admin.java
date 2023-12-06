@@ -29,4 +29,17 @@ public class Admin extends Person {
         System.out.println("Menu:");
         menu.displayMenu();
     }
+    public void generateReports() {
+        double totalProfit = 0.0;
+        int totalOrders = orders.size();
+
+        for (Order order : orders) {
+            double orderTotal = order.getPayment().getTotal();
+            totalProfit += orderTotal;
+        }
+
+        System.out.println("Reports for the day:");
+        System.out.println("Total Profit: $" + totalProfit);
+        System.out.println("Total Number of Orders: " + totalOrders);
+    }
 }
