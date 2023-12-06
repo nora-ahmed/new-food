@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.InputMismatchException;
 class mainMenu {
     public void displayMainMenu() throws InterruptedException {
-
+// hello
         while (true) {
             int choice;
             Scanner scanner = new Scanner(System.in);
@@ -506,7 +506,8 @@ class mainMenu {
             System.out.println("2. Remove Dish from Menu");
             System.out.println("3. Update Dish Price");
             System.out.println("4. View Menu");
-            System.out.println("5. Exit");
+            System.out.println("5. View Daily Report");
+            System.out.println("6. Exit");
             System.out.print("Enter your choice: ");
 
             int choice = getValidIntegerInput(scanner);
@@ -542,8 +543,11 @@ class mainMenu {
                 case 4:
                     admin1.viewMenu();
                     break;
-
                 case 5:
+                    admin1.generateReports();
+                    break;
+
+                case 6:
                     System.out.println("Exiting the program. Goodbye!");
                     exitRequested = true;
                     break;

@@ -10,13 +10,7 @@ public class Payment {
 
 
     public Payment(double total){
-
-
-
         this.total=total;
-
-
-
     }
     public void setPayment_method(String payment_method){
 

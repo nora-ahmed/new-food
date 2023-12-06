@@ -24,6 +24,9 @@ public class Order {
         this.payment = payment;
     }
 
+    public Payment getPayment() {
+        return payment;
+    }
     public int getPick_up_order() {
         return pick_up_order;
     }
