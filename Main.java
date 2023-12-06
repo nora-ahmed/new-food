@@ -204,7 +204,7 @@ class mainMenu {
 
     }
     public void displayMainMenu() throws InterruptedException {
-
+// hello
         while (true) {
             int choice;
             Scanner scanner = new Scanner(System.in);
@@ -269,6 +269,33 @@ class mainMenu {
                 System.out.println("Invalid input. Please enter a valid integer.");
                 resScanner.nextLine(); // Clear the invalid input
             }
+        }
+        System.out.println("1) View Menu");
+        System.out.println("2) View Reviews");
+        System.out.println("Please enter your choice: 1-2:");
+        int viewChoice=0;
+        while(true){
+            try{
+                viewChoice=resScanner.nextInt();
+                if(viewChoice==1|| viewChoice==2){
+                    break;
+                }else
+                {
+                    System.out.println("Invalid choice. Please enter either 1 or 2.");
+                }
+            }
+            catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                resScanner.nextLine(); // Clear the invalid input
+            }
+            if (viewChoice == 1)
+            {
+                Main.r[resChoice - 1].displayMenu();
+            } else
+            {
+                Main.r[resChoice - 1].displayReviews();
+            }
+
         }
 
         Main.r[(resChoice - 1)].displayMenu();
@@ -375,9 +402,10 @@ class mainMenu {
                     orderTimer.startTimer();
                     order.DisplayOrder();
                     TimeUnit.MINUTES.sleep(2);
-                    Review r = new Review(Main.user.get(Main.thisUser));
-                    r.getReview();
-                    r.display();
+                    Review userReview = new Review(Main.user.get(Main.thisUser));
+                    userReview.getReview();
+                    Main.r[0].addReview(userReview);
+                    userReview.display();
                     break;
 
 
@@ -767,6 +795,7 @@ class mainMenu {
         Main.r[2].writeMenuFile("res3.txt");
        // Main.r[2].writeReveiwFile("res3reviews.txt");
     }
+
 }
 
 
