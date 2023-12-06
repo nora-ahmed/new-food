@@ -1,13 +1,208 @@
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.InputMismatchException;
 class mainMenu {
+
+
+    public static void ReadUser() throws IOException {
+        //connect the program with the text file for reading
+        File userFile = new File("user.txt");
+        Scanner readFile = new Scanner(userFile);
+
+        StringTokenizer token = null;
+
+        String userName = "";
+        String email = "";
+        String password = "";
+        String deliveryAddress = "";
+
+        while (readFile.hasNextLine()) {
+
+            token = new StringTokenizer(readFile.nextLine(), ",");
+
+            userName = token.nextToken();
+            email = token.nextToken();
+            password = token.nextToken();
+            deliveryAddress = token.nextToken();
+
+            User user = new User(userName, email, password, deliveryAddress);
+
+           Main.user.add(user);
+
+        }
+    }
+
+    public static void ReadDish1() throws IOException {
+        //connect the program with the text file for reading
+        File dishFile = new File("dish1.txt");
+        Scanner readFile = new Scanner(dishFile);
+
+        StringTokenizer token = null;
+
+        String name = "";
+        float price = 0;
+        String description = "";
+
+        while (readFile.hasNextLine()) {
+
+            token = new StringTokenizer(readFile.nextLine(), ",");
+
+            name = token.nextToken();
+            price = Float.parseFloat(token.nextToken());
+            description = token.nextToken();
+
+            Dish dish = new Dish(name, price, description);
+
+            dishList1.add(dish);
+
+        }
+    }
+
+    public static void ReadDish2() throws IOException {
+        //connect the program with the text file for reading
+
+        Menu menu = new Menu();
+        File dishFile = new File("dish2.txt");
+        Scanner readFile = new Scanner(dishFile);
+
+        StringTokenizer token = null;
+
+        String name = "";
+        float price = 0;
+        String description = "";
+
+        while (readFile.hasNextLine()) {
+
+            token = new StringTokenizer(readFile.nextLine(), ",");
+
+            name = token.nextToken();
+            price = Float.parseFloat(token.nextToken());
+            description = token.nextToken();
+
+            Dish dish = new Dish(name, price, description);
+
+            menu.addDish(dish);
+
+        }
+
+    }
+
+    public static void ReadDish3() throws IOException {
+
+        Menu menu = new Menu();
+        //connect the program with the text file for reading
+        File dishFile = new File("dish3.txt");
+        Scanner readFile = new Scanner(dishFile);
+
+        StringTokenizer token = null;
+
+        String name = "";
+        float price = 0;
+        String description = "";
+
+        while (readFile.hasNextLine()) {
+
+            token = new StringTokenizer(readFile.nextLine(), ",");
+
+            name = token.nextToken();
+            price = Float.parseFloat(token.nextToken());
+            description = token.nextToken();
+
+            Dish dish = new Dish(name, price, description);
+
+            menu.addDish(dish);
+
+        }
+    }
+
+    public static void ReadReview1() throws IOException {
+        //connect the program with the text file for reading
+        File dishFile = new File("review1.txt");
+        Scanner readFile = new Scanner(dishFile);
+
+        StringTokenizer token = null;
+
+        int rating = 0;
+        String feedback = "";
+
+        while (readFile.hasNextLine()) {
+
+            token = new StringTokenizer(readFile.nextLine(), ",");
+
+            rating = Integer.parseInt(token.nextToken());
+            feedback = token.nextToken();
+
+            Review review = new Review(rating, feedback);
+
+            reviewList1.add(review);
+
+        }
+    }
+
+    public static void ReadReview2() throws IOException {
+        //connect the program with the text file for reading
+        File dishFile = new File("review2.txt");
+        Scanner readFile = new Scanner(dishFile);
+
+        StringTokenizer token = null;
+
+        int rating = 0;
+        String feedback = "";
+
+        while (readFile.hasNextLine()) {
+
+            token = new StringTokenizer(readFile.nextLine(), ",");
+
+            rating = Integer.parseInt(token.nextToken());
+            feedback = token.nextToken();
+
+            Review review = new Review(rating, feedback);
+
+            reviewList2.add(review);
+
+        }
+    }
+
+
+    //connect the program with the text file for reading
+    public static void ReadReview3() throws IOException {
+        File dishFile = new File("review3.txt");
+        Scanner readFile = new Scanner(dishFile);
+
+        StringTokenizer token = null;
+
+        int rating = 0;
+        String feedback = "";
+
+        while(readFile.hasNextLine()) {
+
+            token = new StringTokenizer(readFile.nextLine(), ",");
+
+            rating = Integer.parseInt(token.nextToken());
+            feedback = token.nextToken();
+
+            Review review = new Review(rating, feedback);
+
+            reviewList3.add(review);
+
+        }
+    }
+
+    public void  ReadAllFiles()throws IOException{
+
+        ReadUser();
+        ReadDish1();
+        ReadDish2();
+        ReadDish3();
+        ReadReview1();
+        ReadReview2();
+        ReadReview3();
+
+    }
     public void displayMainMenu() throws InterruptedException {
 
         while (true) {
@@ -318,7 +513,7 @@ class mainMenu {
         }
     }
 
-    public void WelcomePage() throws InterruptedException /*,IOException*/ {
+    public void WelcomePage() throws InterruptedException ,IOException {
 
         Scanner read = new Scanner(System.in);
 
@@ -455,7 +650,8 @@ class mainMenu {
                 }
                 case 0: {
                     state = false;
-//this.writeFiles();
+
+                    this.writeFiles();
                     break;
                 }
                 default: {
@@ -559,17 +755,17 @@ class mainMenu {
         return value;
     }
    public void writeFiles() throws IOException {
-        BufferedWriter writer=new BufferedWriter(new FileWriter("users.txt"));
+        BufferedWriter writer=new BufferedWriter(new FileWriter("user.txt"));
         for(int i=0;i<Main.user.size();i++){
             writer.write(Main.user.get(i).toString());
         }
         writer.close();
         Main.r[0].writeMenuFile("res1.txt");
-        Main.r[0].writeReveiwFile("res1reviews.txt");
+       // Main.r[0].writeReveiwFile("res1reviews.txt");
         Main.r[1].writeMenuFile("res2.txt");
-        Main.r[1].writeReveiwFile("res2reviews.txt");
+       // Main.r[1].writeReveiwFile("res2reviews.txt");
         Main.r[2].writeMenuFile("res3.txt");
-        Main.r[2].writeReveiwFile("res3reviews.txt");
+       // Main.r[2].writeReveiwFile("res3reviews.txt");
     }
 }
 
@@ -585,7 +781,7 @@ class Main {
     static List<User> user = new ArrayList<>();
     static Cart c = new Cart();
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args) throws InterruptedException, IOException {
         Dish d = new Dish("ldldl", 30, "dkdkk");
         m.addDish(d);
         for (int i = 1; i < 3; i++) {
@@ -602,6 +798,9 @@ class Main {
         }
 
         mainMenu j = new mainMenu();
+
+        j.ReadAllFiles();
+
         j.WelcomePage();
 
 

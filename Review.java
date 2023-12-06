@@ -5,6 +5,12 @@ public  class Review {
 //private Dish dish;
     private int rating;
     private String feedback;
+
+    Review(int rating , String feedback){
+
+        this.rating = rating;
+        this.feedback = feedback;
+    }
     Review(User user){
         this.user=user;
     }

@@ -11,6 +11,10 @@ public class Restaurant {
     private float ratings;
     private Menu menu;
 
+    public void SetMenu(Menu menu){
+
+        this.menu = menu;
+    }
 
     public Restaurant(String name, String address, String category, String contactInfo, float ratings, Menu menu) {
         this.name = name;
@@ -18,7 +22,7 @@ public class Restaurant {
         this.category=category;
         this.contactInfo = contactInfo;
         this.ratings = ratings;
-        this.menu = menu;
+
     }
 
     public String getName() {

@@ -33,13 +33,13 @@ class CartItem {
         if (customizationIndex >= 0 && customizationIndex < customizations.length) {
             customizations[customizationIndex] = true;
             // Increase the total price for each customization
-            this.dish.setPrice(this.dish.getPrice() + CUSTOMIZATION_PRICE);
+            //this.dish.setPrice(this.dish.getPrice() + CUSTOMIZATION_PRICE);
         }
     }
 
 
-    public double getPrice() {
+    /*public double getPrice() {
         return this.dish.getPrice();
     }
-
+*/
 }

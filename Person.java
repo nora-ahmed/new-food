@@ -1,8 +1,8 @@
 public class Person {
 
-    private String userName;
-    private String email;
-    private String password;
+    protected String userName;
+    protected String email;
+    protected String password;
 
     public void setUserName(String userName) {
         this.userName = userName;

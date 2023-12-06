@@ -7,6 +7,18 @@ public class User extends Person
    private Boolean isLogged =false;
     public static int numberOfUser = 0;
 
+    User(){
+
+    }
+
+    User(String userName , String email , String password ,String deliveryAddress){
+
+        super.userName = userName;
+        super.email = email;
+        super.password = password;
+        this.deliveryAddress = deliveryAddress;
+    }
+
     public void setLogged() {
         isLogged = true;
     }
