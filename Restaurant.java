@@ -12,7 +12,6 @@ public class Restaurant {
     private Menu menu;
     private List<Review> reviews;
 
-
     public Restaurant(String name, String address, String category, String contactInfo, float ratings, Menu menu)
     {
         this.name = name;
@@ -128,7 +127,7 @@ public class Restaurant {
         menu.writeFile(path);
 
     }
-    public double calcAverageRating() {
+    public float calcAverageRating() {
 
         if (reviews.isEmpty())
         {
@@ -146,7 +145,7 @@ public class Restaurant {
 
         }
 
-        return sum / (reviews.size() + 1);
+        return (float)sum / (float)(reviews.size() + 1);
 
     }
     public void addReview(Review review)
