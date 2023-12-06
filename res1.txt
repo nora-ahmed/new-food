@@ -1,1 +1,2 @@
-Pizza,30.0,sssssBurger,50.0,friesBurger,50.0,friesBurger,50.0,friesBurger,50.0,fries
+butter chicken,25,kflkdmlf
+briany,28,jfnfknf

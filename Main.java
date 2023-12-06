@@ -1,14 +1,12 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
+import java.io.FileNotFoundException;
 import java.util.concurrent.TimeUnit;
 import java.util.InputMismatchException;
 class mainMenu {
 //help
 
-    public static void ReadUser() throws IOException {
+    public static void ReadUser() throws IOException, FileNotFoundException {
         //connect the program with the text file for reading
         File userFile = new File("user.txt");
         Scanner readFile = new Scanner(userFile);
@@ -31,14 +29,15 @@ class mainMenu {
 
             User user = new User(userName, email, password, deliveryAddress);
 
-           Main.user.add(user);
 
+            Main.user.add(user);
         }
+
     }
 
     public static void ReadDish1() throws IOException {
         //connect the program with the text file for reading
-        File dishFile = new File("dish1.txt");
+        File dishFile = new File("res1.txt");
         Scanner readFile = new Scanner(dishFile);
 
         StringTokenizer token = null;
@@ -46,7 +45,7 @@ class mainMenu {
         String name = "";
         float price = 0;
         String description = "";
-
+Menu menu=new Menu();
         while (readFile.hasNextLine()) {
 
             token = new StringTokenizer(readFile.nextLine(), ",");
@@ -57,16 +56,19 @@ class mainMenu {
 
             Dish dish = new Dish(name, price, description);
 
-            dishList1.add(dish);
+            menu.addDish(dish);
 
         }
+
+        Main.restaurants.get(0).setMenu(menu);
+
     }
 
     public static void ReadDish2() throws IOException {
         //connect the program with the text file for reading
+Menu menu=new Menu();
 
-        Menu menu = new Menu();
-        File dishFile = new File("dish2.txt");
+        File dishFile = new File("res2.txt");
         Scanner readFile = new Scanner(dishFile);
 
         StringTokenizer token = null;
@@ -89,13 +91,14 @@ class mainMenu {
 
         }
 
+Main.restaurants.get(1).setMenu(menu);
     }
 
     public static void ReadDish3() throws IOException {
 
         Menu menu = new Menu();
         //connect the program with the text file for reading
-        File dishFile = new File("dish3.txt");
+        File dishFile = new File("res33.txt");
         Scanner readFile = new Scanner(dishFile);
 
         StringTokenizer token = null;
@@ -117,9 +120,11 @@ class mainMenu {
             menu.addDish(dish);
 
         }
+
+        Main.restaurants.get(2).setMenu(menu);
     }
 
-    public static void ReadReview1() throws IOException {
+   /* public static void ReadReview1() throws IOException {
         //connect the program with the text file for reading
         File dishFile = new File("review1.txt");
         Scanner readFile = new Scanner(dishFile);
@@ -191,17 +196,17 @@ class mainMenu {
 
         }
     }
-
+*/
     public void  ReadAllFiles()throws IOException{
 
         ReadUser();
         ReadDish1();
         ReadDish2();
         ReadDish3();
-        ReadReview1();
-        ReadReview2();
-        ReadReview3();
-
+       // ReadReview1();
+        //ReadReview2();
+        //ReadReview3();
+return;
     }
     public void displayMainMenu() throws InterruptedException {
 // hello
@@ -249,8 +254,8 @@ class mainMenu {
         Scanner resScanner = new Scanner(System.in);
 
         for (int i = 0; i < 3; i++) {
-            System.out.println((i + 1) + ") Restaurant: " + Main.r[i].getName());
-            System.out.println("Rating: " + Main.r[i].getRatings());
+            System.out.println((i + 1) + ") Restaurant: " + Main.restaurants.get(i).getName());
+            System.out.println("Rating: " + Main.restaurants.get(i).getRatings());
         }
 
         System.out.println("Please enter your choice: 1-3:");
@@ -290,15 +295,15 @@ class mainMenu {
             }
             if (viewChoice == 1)
             {
-                Main.r[resChoice - 1].displayMenu();
+                Main.restaurants.get(resChoice - 1).displayMenu();
             } else
             {
-                Main.r[resChoice - 1].displayReviews();
+                Main.restaurants.get(resChoice - 1).displayReviews();
             }
 
         }
 
-        Main.r[(resChoice - 1)].displayMenu();
+        Main.restaurants.get((resChoice - 1)).displayMenu();
 
         while (true) {
             System.out.println("Please enter your choice: 1-5 or enter 0 to go back:");
@@ -322,7 +327,7 @@ class mainMenu {
             if (dishChoice == 0) {
                 break;
             } else if (dishChoice >= 1 && dishChoice <= 5) {
-                Dish d = Main.r[(resChoice - 1)].getDish(dishChoice - 1);
+                Dish d = Main.restaurants.get((resChoice - 1)).getDish(dishChoice - 1);
                 CartItem ci = new CartItem(d, 1);
                 Main.c.addItem(ci);
             }
@@ -395,7 +400,7 @@ class mainMenu {
                             break;
                         }
                     }
-                    Order order = new Order(Main.c, Main.user.get(Main.thisUser), Main.r[0], payment);
+                    Order order = new Order(Main.c, Main.user.get(Main.thisUser), Main.restaurants.get(0), payment);
                     order.Preferred_DeliveryTime();
                     int orderTime = 2 * 60; // Convert minutes to seconds
                     OrderTimer orderTimer = new OrderTimer(orderTime);
@@ -404,7 +409,7 @@ class mainMenu {
                     TimeUnit.MINUTES.sleep(2);
                     Review userReview = new Review(Main.user.get(Main.thisUser));
                     userReview.getReview();
-                    Main.r[0].addReview(userReview);
+                    Main.restaurants.get(0).addReview(userReview);
                     userReview.display();
                     break;
 
@@ -422,7 +427,7 @@ class mainMenu {
         System.out.println("Please enter the category number:");
 
         for (int i = 0; i < 3; i++) {
-            System.out.println((i + 1) + ") Category: " + Main.r[i].getCategory());
+            System.out.println((i + 1) + ") Category: " + Main.restaurants.get(i).getCategory());
         }
 
         Scanner scanner = new Scanner(System.in);
@@ -441,7 +446,7 @@ class mainMenu {
         for (int i = 0; i < 3; i++) {
             if (categoryChoice == i + 1) {
                 flag = true;
-                Main.r[i].displayMenu();
+                Main.restaurants.get(i).displayMenu();
 
                 while (true) {
                     System.out.println("Please enter your choice: 1-5 or enter 0 to go back:");
@@ -459,7 +464,7 @@ class mainMenu {
                     if (dishChoice == 0) {
                         break;
                     } else if (dishChoice >= 1 && dishChoice <= 5) {
-                        Dish d = Main.r[i].getDish(dishChoice - 1);
+                        Dish d = Main.restaurants.get(i).getDish(dishChoice - 1);
                         CartItem ci = new CartItem(d, 5);
                         Main.c.addItem(ci);
                     }
@@ -499,9 +504,9 @@ class mainMenu {
                 boolean flag = false;
 
                 for (int i = 0; i < 3; i++) {
-                    if (resName.equals(Main.r[i].getName())) {
+                    if (resName.equals(Main.restaurants.get(i).getName())) {
                         flag = true;
-                        Main.r[i].displayMenu();
+                        Main.restaurants.get(i).displayMenu();
 
                         while (true) {
                             System.out.println("Please enter your choice: 1-5 or enter 0 to go back:");
@@ -521,7 +526,7 @@ class mainMenu {
                             if (dishChoice == 0) {
                                 break;
                             } else if (dishChoice >= 1 && dishChoice <= 5) {
-                                Dish d = Main.r[i].getDish(dishChoice - 1);
+                                Dish d = Main.restaurants.get(i).getDish(dishChoice - 1);
                                 CartItem ci = new CartItem(d, 5);
                                 Main.c.addItem(ci);
                             }
@@ -651,6 +656,9 @@ class mainMenu {
 
                     System.out.println("Enter your Password");
                     String password = read.next();
+                    if(username=="nora"&&password=="nora"){
+                        this.AdminDashboard();
+                    }
 
                     for (int i = 0; i < index; i++) {
 
@@ -786,13 +794,14 @@ class mainMenu {
         BufferedWriter writer=new BufferedWriter(new FileWriter("user.txt"));
         for(int i=0;i<Main.user.size();i++){
             writer.write(Main.user.get(i).toString());
+          writer.newLine();
         }
         writer.close();
-        Main.r[0].writeMenuFile("res1.txt");
+        Main.restaurants.get(0).writeMenuFile("res1.txt");
        // Main.r[0].writeReveiwFile("res1reviews.txt");
-        Main.r[1].writeMenuFile("res2.txt");
+        Main.restaurants.get(1).writeMenuFile("res2.txt");
        // Main.r[1].writeReveiwFile("res2reviews.txt");
-        Main.r[2].writeMenuFile("res3.txt");
+        Main.restaurants.get(2).writeMenuFile("res3.txt");
        // Main.r[2].writeReveiwFile("res3reviews.txt");
     }
 
@@ -801,34 +810,26 @@ class mainMenu {
 
 class Main {
 
-    static Restaurant r[] = new Restaurant[3];
-    static User u = new User();
-    static Menu m = new Menu();
-    static Menu v = new Menu();
-    static User farah = new User();
+  static List<Restaurant> restaurants=new ArrayList<>();
     static int thisUser;
     static List<User> user = new ArrayList<>();
     static Cart c = new Cart();
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        Dish d = new Dish("ldldl", 30, "dkdkk");
-        m.addDish(d);
-        for (int i = 1; i < 3; i++) {
-            r[i] = new Restaurant("fkkfkf", "jhfhdfkj", "chineese", "fhjfkhkd", 4.5F, m);
-        }
-
-
-        r[0] = new Restaurant("Nora", "nora", "American", "nora", 3.5F, v);
-        Dish b = new Dish("Pizza", 30, "sssss");
-        v.addDish(b);
-        for (int i = 1; i < 5; i++) {
-            Dish m = new Dish("Burger", 50, "fries");
-            v.addDish(m);
-        }
+        Restaurant r= new Restaurant("Tikka", "india", "indian", "callIndia", 0.0F);
+        restaurants.add(r);
+      Restaurant r2=new Restaurant("Casamia", "italy", "Italian", "callItaly", 0.0F);
+      restaurants.add(r2);
+       Restaurant r3= new Restaurant("Al-Rukn al-sharki", "middle east", "arabian", "callEast", 0.0F);
+       restaurants.add(r3);
 
         mainMenu j = new mainMenu();
 
-        j.ReadAllFiles();
+        mainMenu.ReadUser();
+        mainMenu.ReadDish1();
+        mainMenu.ReadDish2();
+        mainMenu.ReadDish3();
+
 
         j.WelcomePage();
 

@@ -12,7 +12,11 @@ public class Restaurant {
     private Menu menu;
     private List<Review> reviews;
 
-    public Restaurant(String name, String address, String category, String contactInfo, float ratings, Menu menu)
+    public void setMenu(Menu menu) {
+        this.menu = menu;
+    }
+
+    public Restaurant(String name, String address, String category, String contactInfo, float ratings)
     {
         this.name = name;
 
@@ -24,7 +28,7 @@ public class Restaurant {
 
         this.ratings = ratings;
 
-        this.menu = menu;
+
 
         this.reviews = new ArrayList<>();
 
