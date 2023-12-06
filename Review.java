@@ -15,6 +15,9 @@ public  class Review {
         System.out.println("Please enter you feedback:");
         this.feedback=scanner.next();
     }
+    public String toString(){
+        return user.getUserName()+","+rating+","+feedback;
+    }
 
     public int getRating() {
         return rating;

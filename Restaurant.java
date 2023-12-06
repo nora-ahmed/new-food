@@ -1,5 +1,9 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 public class Restaurant {
+    //hyghytdhtrd
     private String name;
     private String address;
     private String category;
@@ -70,4 +74,14 @@ public class Restaurant {
     public Dish getDish(int num){
         return menu.getDish(num);
     }
+    public void writeMenuFile(String path) throws IOException {
+        menu.writeFile(path);
+    }
+    /*public void writeReviewFile(String path) throws IOException {
+        BufferedWriter writer=new BufferedWriter(new FileWriter(path));
+        for(int i=0;i<reviews.size();i++){
+            writer.write(reviews.get(i).toString());
+        }
+        writer.close();
+    }*/
 }

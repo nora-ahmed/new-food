@@ -24,5 +24,7 @@ public class User extends Person
         return deliveryAddress;
     }
 
-
+public String toString (){
+        return getUserName()+","+getEmail()+","+getPassword()+","+deliveryAddress;
+}
 }

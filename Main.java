@@ -1,3 +1,6 @@
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -315,7 +318,7 @@ class mainMenu {
         }
     }
 
-    public void WelcomePage() throws InterruptedException {
+    public void WelcomePage() throws InterruptedException /*,IOException*/ {
 
         Scanner read = new Scanner(System.in);
 
@@ -452,7 +455,7 @@ class mainMenu {
                 }
                 case 0: {
                     state = false;
-
+//this.writeFiles();
                     break;
                 }
                 default: {
@@ -550,6 +553,19 @@ class mainMenu {
             }
         }
         return value;
+    }
+   public void writeFiles() throws IOException {
+        BufferedWriter writer=new BufferedWriter(new FileWriter("users.txt"));
+        for(int i=0;i<Main.user.size();i++){
+            writer.write(Main.user.get(i).toString());
+        }
+        writer.close();
+        Main.r[0].writeMenuFile("res1.txt");
+        Main.r[0].writeReveiwFile("res1reviews.txt");
+        Main.r[1].writeMenuFile("res2.txt");
+        Main.r[1].writeReveiwFile("res2reviews.txt");
+        Main.r[2].writeMenuFile("res3.txt");
+        Main.r[2].writeReveiwFile("res3reviews.txt");
     }
 }
 

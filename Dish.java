@@ -20,6 +20,9 @@ public class Dish {
     {
         this.name=name;
     }
+    public String toString(){
+        return name+","+price+","+description;
+    }
 
     // public void customization(){
     //     Scanner scanner=new Scanner(System.in);

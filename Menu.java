@@ -1,3 +1,7 @@
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -40,5 +44,12 @@ public class Menu {
 
     public List<Dish> getDishes() {
         return menuItems;
+    }
+    public void writeFile(String path) throws IOException {
+        BufferedWriter writer=new BufferedWriter(new FileWriter(path));
+        for(int i=0;i<menuItems.size();i++){
+            writer.write(menuItems.get(i).toString());
+        }
+        writer.close();
     }
 }
