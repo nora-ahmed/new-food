@@ -9,11 +9,16 @@ public class Restaurant {
     private String category;
     private String contactInfo;
     private float ratings;
+    boolean thisRes=false;
     private Menu menu;
     private List<Review> reviews;
 
     public void setMenu(Menu menu) {
         this.menu = menu;
+    }
+
+    public void setThisRes() {
+        this.thisRes = true;
     }
 
     public Restaurant(String name, String address, String category, String contactInfo, float ratings)
@@ -181,11 +186,11 @@ public class Restaurant {
             }
         }
     }
-    /*public void writeReviewFile(String path) throws IOException {
+    public void writeReviewFile(String path) throws IOException {
         BufferedWriter writer=new BufferedWriter(new FileWriter(path));
         for(int i=0;i<reviews.size();i++){
             writer.write(reviews.get(i).toString());
         }
         writer.close();
-    }*/
+    }
 }

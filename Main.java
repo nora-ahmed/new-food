@@ -126,7 +126,7 @@ Main.restaurants.get(1).setMenu(menu);
         Main.restaurants.get(2).setMenu(menu);
     }
 
-   /* public static void ReadReview1() throws IOException {
+    public static void ReadReview1() throws IOException {
         //connect the program with the text file for reading
         File dishFile = new File("review1.txt");
         Scanner readFile = new Scanner(dishFile);
@@ -145,8 +145,8 @@ Main.restaurants.get(1).setMenu(menu);
 
             Review review = new Review(rating, feedback);
 
-            reviewList1.add(review);
-//hi
+            Main.restaurants.get(0).addReview(review);
+
         }
     }
 
@@ -169,7 +169,7 @@ Main.restaurants.get(1).setMenu(menu);
 
             Review review = new Review(rating, feedback);
 
-            reviewList2.add(review);
+            Main.restaurants.get(1).addReview(review);
 
         }
     }
@@ -194,11 +194,11 @@ Main.restaurants.get(1).setMenu(menu);
 
             Review review = new Review(rating, feedback);
 
-            reviewList3.add(review);
+            Main.restaurants.get(2).addReview(review);
 
         }
     }
-*/
+
     public void  ReadAllFiles()throws IOException{
 
         ReadUser();
@@ -329,6 +329,7 @@ return;
             if (dishChoice == 0) {
                 break;
             } else if (dishChoice >= 1 && dishChoice <= 5) {
+                Main.thisRes=resChoice-1;
                 Dish d = Main.restaurants.get((resChoice - 1)).getDish(dishChoice - 1);
                 CartItem ci = new CartItem(d, 1);
                 Main.c.addItem(ci);
@@ -396,7 +397,7 @@ return;
                 if (payment.getPaymentStatus()) {
                     // Create the order
                     Main.thisUser = -1;
-                    for (int i = 0; i < User.numberOfUser; i++) {
+                    for (int i = 0; i < Main.user.size(); i++) {
                         if (Main.user.get(i).getLogged()) {
                             Main.thisUser = i;
                             break;
@@ -411,8 +412,8 @@ return;
                     TimeUnit.MINUTES.sleep(2);
                     Review userReview = new Review(Main.user.get(Main.thisUser));
                     userReview.getReview();
-                    Main.restaurants.get(0).addReview(userReview);
-                    userReview.display();
+                    Main.restaurants.get(Main.thisRes).addReview(userReview);
+
                     break;
 
 
@@ -802,11 +803,11 @@ if(username.equals("nora")&&password.equals("12")){
         }
         writer.close();
         Main.restaurants.get(0).writeMenuFile("res1.txt");
-       // Main.r[0].writeReveiwFile("res1reviews.txt");
+        Main.restaurants.get(0).writeReviewFile("review1.txt");
         Main.restaurants.get(1).writeMenuFile("res2.txt");
-       // Main.r[1].writeReveiwFile("res2reviews.txt");
+       Main.restaurants.get(1).writeReviewFile("review2.txt");
         Main.restaurants.get(2).writeMenuFile("res3.txt");
-       // Main.r[2].writeReveiwFile("res3reviews.txt");
+        Main.restaurants.get(2).writeReviewFile("review3.txt");
     }
 
 }
@@ -816,6 +817,7 @@ class Main {
 
   static List<Restaurant> restaurants=new ArrayList<>();
     static int thisUser;
+    static int thisRes;
     static List<User> user = new ArrayList<>();
     static Cart c = new Cart();
 
@@ -828,9 +830,6 @@ class Main {
        restaurants.add(r3);
 
         mainMenu j = new mainMenu();
-
-   //j.ReadAllFiles();
-        //mainMenu.ReadUser();
         j.ReadAllFiles();
         j.WelcomePage();
 
