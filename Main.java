@@ -6,32 +6,33 @@ import java.util.InputMismatchException;
 class mainMenu {
 //help
 
-    public static void ReadUser() throws IOException, FileNotFoundException {
+    public static void ReadUser() throws IOException{
         //connect the program with the text file for reading
-        File userFile = new File("user.txt");
-        Scanner readFile = new Scanner(userFile);
 
-        StringTokenizer token = null;
+           File userFile = new File("user.txt");
+            Scanner readFile = new Scanner(userFile);
 
-        String userName = "";
-        String email = "";
-        String password = "";
-        String deliveryAddress = "";
+            StringTokenizer token = null;
 
-        while (readFile.hasNextLine()) {
+            String userName = "";
+            String email = "";
+            String password = "";
+            String deliveryAddress = "";
 
-            token = new StringTokenizer(readFile.nextLine(), ",");
+            while (readFile.hasNextLine()) {
 
-            userName = token.nextToken();
-            email = token.nextToken();
-            password = token.nextToken();
-            deliveryAddress = token.nextToken();
+                token = new StringTokenizer(readFile.nextLine(), ",");
 
-            User user = new User(userName, email, password, deliveryAddress);
+                userName = token.nextToken();
+                email = token.nextToken();
+                password = token.nextToken();
+                deliveryAddress = token.nextToken();
+
+                User user = new User(userName, email, password, deliveryAddress);
 
 
-            Main.user.add(user);
-        }
+                Main.user.add(user);
+            }
 
     }
 
@@ -69,6 +70,7 @@ Menu menu=new Menu();
 Menu menu=new Menu();
 
         File dishFile = new File("res2.txt");
+        System.out.println(dishFile.getAbsolutePath());
         Scanner readFile = new Scanner(dishFile);
 
         StringTokenizer token = null;
@@ -98,7 +100,7 @@ Main.restaurants.get(1).setMenu(menu);
 
         Menu menu = new Menu();
         //connect the program with the text file for reading
-        File dishFile = new File("res33.txt");
+        File dishFile = new File("res3.txt");
         Scanner readFile = new Scanner(dishFile);
 
         StringTokenizer token = null;
@@ -644,6 +646,7 @@ return;
                     Main.user.add(u);
 
 
+
                     User.numberOfUser++;
 
                     state = true;
@@ -656,11 +659,12 @@ return;
 
                     System.out.println("Enter your Password");
                     String password = read.next();
-                    if(username=="nora"&&password=="nora"){
-                        this.AdminDashboard();
-                    }
+if(username.equals("nora")&&password.equals("12")){
+    this.AdminDashboard();
+    break;
+}
 
-                    for (int i = 0; i < index; i++) {
+                    for (int i = 0; i < Main.user.size(); i++) {
 
                         if (username.equals(Main.user.get(i).getUserName()) && password.equals(Main.user.get(i).getPassword())) {
 
@@ -825,12 +829,9 @@ class Main {
 
         mainMenu j = new mainMenu();
 
-        mainMenu.ReadUser();
-        mainMenu.ReadDish1();
-        mainMenu.ReadDish2();
-        mainMenu.ReadDish3();
-
-
+   //j.ReadAllFiles();
+        //mainMenu.ReadUser();
+        j.ReadAllFiles();
         j.WelcomePage();
 
 
