@@ -18,7 +18,9 @@ User(){
         super.password = password;
         this.deliveryAddress = deliveryAddress;
     }
-
+public String getUsername(){
+    return this.userName;
+}
     public void setLogged() {
         isLogged = true;
     }

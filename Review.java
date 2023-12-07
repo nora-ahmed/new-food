@@ -1,18 +1,18 @@
 import java.util.Scanner;
 
 public  class Review {
-    private User user;
+    String name;
 //private Dish dish;
     private int rating;
     private String feedback;
 
-    Review(int rating , String feedback){
-
+    Review(String name,int rating , String feedback){
+this.name=name;
         this.rating = rating;
         this.feedback = feedback;
     }
-    Review(User user){
-        this.user=user;
+    Review(String name){
+        this.name=name;
     }
     public void getReview(/*User user,Dish dish*/){
         Scanner scanner=new Scanner(System.in);
@@ -22,7 +22,7 @@ public  class Review {
         this.feedback=scanner.next();
     }
     public String toString(){
-        return user.getUserName()+","+rating+","+feedback;
+        return name+","+rating+","+feedback;
     }
 
     public int getRating() {
@@ -30,7 +30,7 @@ public  class Review {
     }
 
     public void display(){
-        System.out.println(this.user.getUserName());
+        System.out.println(name);
 
         System.out.println("Rating ="+rating);
         System.out.println("Feedback:"+feedback);

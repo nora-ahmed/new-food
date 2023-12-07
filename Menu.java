@@ -49,6 +49,7 @@ public class Menu {
         BufferedWriter writer=new BufferedWriter(new FileWriter(path));
         for(int i=0;i<menuItems.size();i++){
             writer.write(menuItems.get(i).toString());
+            writer.newLine();
         }
         writer.close();
     }

@@ -132,18 +132,18 @@ Main.restaurants.get(1).setMenu(menu);
         Scanner readFile = new Scanner(dishFile);
 
         StringTokenizer token = null;
-
+String name="";
         int rating = 0;
         String feedback = "";
 
         while (readFile.hasNextLine()) {
 
             token = new StringTokenizer(readFile.nextLine(), ",");
-
+name=token.nextToken();
             rating = Integer.parseInt(token.nextToken());
             feedback = token.nextToken();
 
-            Review review = new Review(rating, feedback);
+            Review review = new Review(name,rating, feedback);
 
             Main.restaurants.get(0).addReview(review);
 
@@ -159,15 +159,16 @@ Main.restaurants.get(1).setMenu(menu);
 
         int rating = 0;
         String feedback = "";
+        String name="";
 
         while (readFile.hasNextLine()) {
 
             token = new StringTokenizer(readFile.nextLine(), ",");
-
+name=token.nextToken();
             rating = Integer.parseInt(token.nextToken());
             feedback = token.nextToken();
 
-            Review review = new Review(rating, feedback);
+            Review review = new Review(name,rating, feedback);
 
             Main.restaurants.get(1).addReview(review);
 
@@ -181,18 +182,18 @@ Main.restaurants.get(1).setMenu(menu);
         Scanner readFile = new Scanner(dishFile);
 
         StringTokenizer token = null;
-
+String name="";
         int rating = 0;
         String feedback = "";
 
         while(readFile.hasNextLine()) {
 
             token = new StringTokenizer(readFile.nextLine(), ",");
-
+name=token.nextToken();
             rating = Integer.parseInt(token.nextToken());
             feedback = token.nextToken();
 
-            Review review = new Review(rating, feedback);
+            Review review = new Review(name,rating, feedback);
 
             Main.restaurants.get(2).addReview(review);
 
@@ -205,10 +206,10 @@ Main.restaurants.get(1).setMenu(menu);
         ReadDish1();
         ReadDish2();
         ReadDish3();
-       // ReadReview1();
-        //ReadReview2();
-        //ReadReview3();
-return;
+       ReadReview1();
+        ReadReview2();
+        ReadReview3();
+
     }
     public void displayMainMenu() throws InterruptedException {
 // hello
@@ -255,7 +256,7 @@ return;
     public void displayRestaurants() {
         Scanner resScanner = new Scanner(System.in);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < Main.restaurants.size(); i++) {
             System.out.println((i + 1) + ") Restaurant: " + Main.restaurants.get(i).getName());
             System.out.println("Rating: " + Main.restaurants.get(i).getRatings());
         }
@@ -284,9 +285,14 @@ return;
         while(true){
             try{
                 viewChoice=resScanner.nextInt();
-                if(viewChoice==1|| viewChoice==2){
+                if(viewChoice==1){
+                   // Main.restaurants.get(resChoice - 1).displayMenu();
                     break;
-                }else
+                }
+                else if(viewChoice==2){   Main.restaurants.get(resChoice - 1).displayReviews();
+                break;
+                }
+                else
                 {
                     System.out.println("Invalid choice. Please enter either 1 or 2.");
                 }
@@ -295,13 +301,7 @@ return;
                 System.out.println("Invalid input. Please enter a valid integer.");
                 resScanner.nextLine(); // Clear the invalid input
             }
-            if (viewChoice == 1)
-            {
-                Main.restaurants.get(resChoice - 1).displayMenu();
-            } else
-            {
-                Main.restaurants.get(resChoice - 1).displayReviews();
-            }
+
 
         }
 
@@ -328,8 +328,8 @@ return;
 
             if (dishChoice == 0) {
                 break;
-            } else if (dishChoice >= 1 && dishChoice <= 5) {
-                Main.thisRes=resChoice-1;
+            } else if (dishChoice >= 1 && dishChoice <= 2) {
+              //  Main.thisRes=resChoice-1;
                 Dish d = Main.restaurants.get((resChoice - 1)).getDish(dishChoice - 1);
                 CartItem ci = new CartItem(d, 1);
                 Main.c.addItem(ci);
@@ -396,13 +396,8 @@ return;
                 // Check if the payment was successful
                 if (payment.getPaymentStatus()) {
                     // Create the order
-                    Main.thisUser = -1;
-                    for (int i = 0; i < Main.user.size(); i++) {
-                        if (Main.user.get(i).getLogged()) {
-                            Main.thisUser = i;
-                            break;
-                        }
-                    }
+
+
                     Order order = new Order(Main.c, Main.user.get(Main.thisUser), Main.restaurants.get(0), payment);
                     order.Preferred_DeliveryTime();
                     int orderTime = 2 * 60; // Convert minutes to seconds
@@ -410,7 +405,7 @@ return;
                     orderTimer.startTimer();
                     order.DisplayOrder();
                     TimeUnit.MINUTES.sleep(2);
-                    Review userReview = new Review(Main.user.get(Main.thisUser));
+                    Review userReview = new Review(Main.user.get(Main.thisUser).getUserName());
                     userReview.getReview();
                     Main.restaurants.get(Main.thisRes).addReview(userReview);
 
@@ -670,7 +665,7 @@ if(username.equals("nora")&&password.equals("12")){
                         if (username.equals(Main.user.get(i).getUserName()) && password.equals(Main.user.get(i).getPassword())) {
 
                             System.out.println("login successfully");
-                            Main.user.get(i).setLogged();
+                            Main.thisUser=i;
                             checkLogin = true;
                             this.displayMainMenu();
 

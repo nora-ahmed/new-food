@@ -190,6 +190,7 @@ public class Restaurant {
         BufferedWriter writer=new BufferedWriter(new FileWriter(path));
         for(int i=0;i<reviews.size();i++){
             writer.write(reviews.get(i).toString());
+            writer.newLine();
         }
         writer.close();
     }
