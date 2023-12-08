@@ -70,7 +70,7 @@ Menu menu=new Menu();
 Menu menu=new Menu();
 
         File dishFile = new File("res2.txt");
-        System.out.println(dishFile.getAbsolutePath());
+
         Scanner readFile = new Scanner(dishFile);
 
         StringTokenizer token = null;
@@ -329,7 +329,7 @@ name=token.nextToken();
             if (dishChoice == 0) {
                 break;
             } else if (dishChoice >= 1 && dishChoice <= 2) {
-              //  Main.thisRes=resChoice-1;
+              Main.thisRes=resChoice-1;
                 Dish d = Main.restaurants.get((resChoice - 1)).getDish(dishChoice - 1);
                 CartItem ci = new CartItem(d, 1);
                 Main.c.addItem(ci);
@@ -398,7 +398,7 @@ name=token.nextToken();
                     // Create the order
 
 
-                    Order order = new Order(Main.c, Main.user.get(Main.thisUser), Main.restaurants.get(0), payment);
+                    Order order = new Order(Main.c, Main.user.get(Main.thisUser), Main.restaurants.get(Main.thisRes), payment);
                     order.Preferred_DeliveryTime();
                     int orderTime = 2 * 60; // Convert minutes to seconds
                     OrderTimer orderTimer = new OrderTimer(orderTime);
@@ -462,6 +462,7 @@ name=token.nextToken();
                     if (dishChoice == 0) {
                         break;
                     } else if (dishChoice >= 1 && dishChoice <= 5) {
+                        Main.thisRes=i;
                         Dish d = Main.restaurants.get(i).getDish(dishChoice - 1);
                         CartItem ci = new CartItem(d, 5);
                         Main.c.addItem(ci);
@@ -524,6 +525,7 @@ name=token.nextToken();
                             if (dishChoice == 0) {
                                 break;
                             } else if (dishChoice >= 1 && dishChoice <= 5) {
+                                Main.thisRes=i;
                                 Dish d = Main.restaurants.get(i).getDish(dishChoice - 1);
                                 CartItem ci = new CartItem(d, 5);
                                 Main.c.addItem(ci);
