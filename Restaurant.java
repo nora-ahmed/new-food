@@ -145,7 +145,7 @@ public class Restaurant {
 
         }
 
-        double sum = ratings;
+        double sum = 0;
 
         for (Review review : reviews)
         {
@@ -154,7 +154,7 @@ public class Restaurant {
 
         }
 
-        return (float)sum / (float)(reviews.size() + 1);
+        return (float)sum / (float)(reviews.size() );
 
     }
     public void addReview(Review review)
@@ -162,7 +162,7 @@ public class Restaurant {
 
         reviews.add(review);
 
-        calcAverageRating();
+     ratings=  calcAverageRating();
 
     }
     public void displayReviews()
@@ -181,7 +181,7 @@ public class Restaurant {
             for (Review review : reviews)
             {
 
-                System.out.println(review);
+                review.display();
 
             }
         }
