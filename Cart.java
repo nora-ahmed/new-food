@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 class Cart {
 
@@ -9,7 +10,6 @@ class Cart {
     public Cart() {
         this.items = new ArrayList<>();
     }
-
 
 
     public void addItem(CartItem item) {
@@ -24,18 +24,31 @@ class Cart {
         }
 
         if (response.equalsIgnoreCase("yes")) {
-            System.out.println("Available customizations: 1. extra potato, 2. salad, 3. water");
-            System.out.println("Choose a customization (enter the corresponding number):");
-            int customizationIndex = scanner.nextInt() - 1;  // Adjust for array index
+            int customizationIndex;
 
-            if (customizationIndex >= 0 && customizationIndex < item.getCustomizations().length) {
-                item.customize(customizationIndex);
-            } else {
-                System.out.println("Invalid customization choice.");
-            }
+            do {
+                System.out.println("Available customizations: 1. extra potato, 2. salad, 3. water");
+                System.out.println("Choose a customization (enter the corresponding number):");
+
+                try {
+                    customizationIndex = scanner.nextInt() - 1;  // Adjust for array index
+
+                    if (customizationIndex >= 0 && customizationIndex < item.getCustomizations().length) {
+                        item.customize(customizationIndex);
+                    } else {
+                        System.out.println("Invalid customization choice. Please enter 1, 2, or 3.");
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a valid integer.");
+                    scanner.next(); // Clear the invalid input
+                    customizationIndex = -1; // Set to -1 to continue the loop
+                }
+            } while (customizationIndex < 0 || customizationIndex >= item.getCustomizations().length);
         }
+
         this.items.add(item);
     }
+
 
 
     public void removeItem(String itemName) {
@@ -107,24 +120,39 @@ class Cart {
     public void emptyCart() {
         this.items.clear();
     }
+
+
     public void editQuantity(String itemName) {
         for (CartItem item : this.items) {
             if (item.getDish().getName().equalsIgnoreCase(itemName)) {
                 System.out.println("Enter the new quantity for " + item.getDish().getName() + ": ");
                 Scanner scanner = new Scanner(System.in);
-                int newQuantity = scanner.nextInt();
 
-                if (newQuantity == 0) {
-                    // If user enters 0, remove the item from the cart
-                    this.items.remove(item);
-                    System.out.println("Item removed from the cart.");
-                } else {
-                    // Update the quantity
-                    item.setQuantity(newQuantity);
-                    System.out.println("Quantity updated successfully.");
+                try {
+                    // Check if the next input is an integer
+                    if (scanner.hasNextInt()) {
+                        int newQuantity = scanner.nextInt();
+
+                        if (newQuantity == 0) {
+                            // If user enters 0, remove the item from the cart
+                            this.items.remove(item);
+                            System.out.println("Item removed from the cart.");
+                        } else {
+                            // Update the quantity
+                            item.setQuantity(newQuantity);
+                            System.out.println("Quantity updated successfully.");
+                        }
+                        // Display the updated cart
+                        System.out.println(display());
+                    } else {
+                        System.out.println("Invalid input. Please enter a valid integer.");
+                        scanner.next(); // Clear the invalid input
+                    }
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a valid integer.");
+                    scanner.next(); // Clear the invalid input
                 }
-                // Display the updated cart
-                System.out.println(display());
+
                 return;
             }
         }
@@ -132,6 +160,7 @@ class Cart {
         // If the item is not found in the cart
         System.out.println("Item not found in cart.");
     }
+
 
 
     public String display() {
