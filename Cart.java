@@ -10,18 +10,20 @@ class Cart {
         this.items = new ArrayList<>();
     }
 
+
+
     public void addItem(CartItem item) {
         // Ask the user if they want to customize the item
         System.out.println("Do you want to customize '" + item.getDish().getName() + "'? (yes/no)");
         Scanner scanner = new Scanner(System.in);
-        String response = scanner.nextLine().toLowerCase();
+        String response = scanner.next();
 
-        while (!response.equals("yes") && !response.equals("no")) {
+        while (!response.equalsIgnoreCase("yes") && !response.equalsIgnoreCase("no")) {
             System.out.println("Invalid choice. Please enter 'yes' or 'no':");
-            response = scanner.nextLine().toLowerCase();
+            response = scanner.next();
         }
 
-        if (response.equals("yes")) {
+        if (response.equalsIgnoreCase("yes")) {
             System.out.println("Available customizations: 1. extra potato, 2. salad, 3. water");
             System.out.println("Choose a customization (enter the corresponding number):");
             int customizationIndex = scanner.nextInt() - 1;  // Adjust for array index
@@ -32,17 +34,15 @@ class Cart {
                 System.out.println("Invalid customization choice.");
             }
         }
-
         this.items.add(item);
     }
-
 
 
     public void removeItem(String itemName) {
         int itemIndex = -1;
         for (int i = 0; i < this.items.size(); i++) {
             CartItem item = this.items.get(i);
-            if (item.getDish().getName().equals(itemName)) {
+            if (item.getDish().getName().equalsIgnoreCase(itemName)) {
                 itemIndex = i;
                 break;
             }
@@ -71,7 +71,8 @@ class Cart {
         } else {
             this.items.remove(itemIndex);
         }
-
+        // Display the updated cart
+        System.out.println(display());
     }
 
 
@@ -93,18 +94,46 @@ class Cart {
     public List<CartItem> getItems() {
         return this.items;
     }
-
-    public double getTotalPrice() {
-        double totalPrice = 0.0;
+    public float getTotalPrice() {
+        float totalPrice = 0.0f;
         for (CartItem item : this.items) {
-           // totalPrice += item.getPrice() * item.quantity;
+            totalPrice += (item.getDish().getPrice() + item.getCustomizationPrice()) * item.getQuantity();
         }
         return totalPrice;
     }
+
+
+
     public void emptyCart() {
         this.items.clear();
-        System.out.println("Your cart is now empty");
     }
+    public void editQuantity(String itemName) {
+        for (CartItem item : this.items) {
+            if (item.getDish().getName().equalsIgnoreCase(itemName)) {
+                System.out.println("Enter the new quantity for " + item.getDish().getName() + ": ");
+                Scanner scanner = new Scanner(System.in);
+                int newQuantity = scanner.nextInt();
+
+                if (newQuantity == 0) {
+                    // If user enters 0, remove the item from the cart
+                    this.items.remove(item);
+                    System.out.println("Item removed from the cart.");
+                } else {
+                    // Update the quantity
+                    item.setQuantity(newQuantity);
+                    System.out.println("Quantity updated successfully.");
+                }
+                // Display the updated cart
+                System.out.println(display());
+                return;
+            }
+        }
+
+        // If the item is not found in the cart
+        System.out.println("Item not found in cart.");
+    }
+
+
     public String display() {
         StringBuilder cartDisplay = new StringBuilder();
 
@@ -126,7 +155,9 @@ class Cart {
                 boolean[] customizations = item.getCustomizations();
                 for (int i = 0; i < customizations.length; i++) {
                     if (customizations[i]) {
-                        cartDisplay.append("\n   - Customization ").append(i + 1);
+                        // Map customization index to actual customization name
+                        String customizationName = mapIndexToCustomizationName(i);
+                        cartDisplay.append("\n   - Customization: ").append(customizationName);
                     }
                 }
             }
@@ -136,6 +167,18 @@ class Cart {
 
         return cartDisplay.toString();
     }
+
+    // Helper method to map customization index to customization name
+    private String mapIndexToCustomizationName(int index) {
+        String[] customizationNames = {"extra potato", "salad", "water"};
+
+        if (index >= 0 && index < customizationNames.length) {
+            return customizationNames[index];
+        } else {
+            return "Unknown customization";
+        }
+    }
+
 
 
 }

@@ -338,7 +338,13 @@ name=token.nextToken();
     }
 
     public void viewCart() throws InterruptedException {
-        Main.c.display();
+
+        String cartDisplay = Main.c.display(); // Get the cart display string
+
+        // Print the cart display
+        System.out.println(cartDisplay);
+
+
         while (true) {
             System.out.println("Please enter your choice:");
             System.out.println("1) Edit your order.");
@@ -357,10 +363,9 @@ name=token.nextToken();
             if (cartChoice == 1) {
                 while (true) {
                     System.out.println("Please enter your choice:");
-                    System.out.println("1) Customize your order.");
-                    System.out.println("2) Edit the quantity.");
-                    System.out.println("3) Delete an item.");
-                    System.out.println("4) Go back");
+                    System.out.println("1) Edit quantity.");
+                    System.out.println("2) Delete an item.");
+                    System.out.println("3) Go back");
                     Scanner scanner1 = new Scanner(System.in);
                     int cusChoice;
 
@@ -373,17 +378,21 @@ name=token.nextToken();
                     }
 
                     if (cusChoice == 1) {
-                        break;
+                        // Edit quantity
+                        System.out.println("Please enter the item's name you want to edit quantity for:");
+                        String itemName;
+                        Scanner scanner2 = new Scanner(System.in);
+                        itemName = scanner2.nextLine();
+                        Main.c.editQuantity(itemName);
 
-                    } else if (cusChoice == 2) {
-                        break;
-                    } else if (cusChoice == 3) {
+                    }  else if (cusChoice == 2) {
                         System.out.println("Please enter the item's name you want to delete:");
                         String itemName;
                         Scanner scanner2 = new Scanner(System.in);
-                        itemName = scanner2.next();
+                        itemName = scanner2.nextLine();
                         Main.c.removeItem(itemName);
-                    } else if (cusChoice == 4) {
+
+                    } else if (cusChoice == 3) {
                         break;
                     }
 

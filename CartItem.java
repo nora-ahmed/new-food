@@ -36,10 +36,17 @@ class CartItem {
             //this.dish.setPrice(this.dish.getPrice() + CUSTOMIZATION_PRICE);
         }
     }
-
-
-    /*public double getPrice() {
-        return this.dish.getPrice();
+    public float getCustomizationPrice() {
+        int numberOfCustomizations = 0;
+        for (boolean customization : customizations) {
+            if (customization) {
+                numberOfCustomizations++;
+            }
+        }
+        return numberOfCustomizations * CUSTOMIZATION_PRICE;
     }
-*/
+
+
+
+
 }
