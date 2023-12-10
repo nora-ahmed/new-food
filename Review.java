@@ -1,8 +1,9 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public  class Review {
     String name;
-//private Dish dish;
+
     private int rating;
     private String feedback;
 
@@ -14,10 +15,32 @@ this.name=name;
     Review(String name){
         this.name=name;
     }
-    public void getReview(/*User user,Dish dish*/){
+    public void getReview(){
         Scanner scanner=new Scanner(System.in);
         System.out.println("Please enter you rating form 1-5:");
-        this.rating=  scanner.nextInt();
+        int ratings;
+        while (true) {
+            try {
+
+
+
+                ratings=   scanner.nextInt();
+
+                if(ratings>=1&&ratings<=5){
+                    this.rating=ratings;
+                    break;
+                }
+               else{
+                   System.out.println("Invalid, please enter a number between 1-5:");
+
+                }
+
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a valid integer.");
+                scanner.nextLine();
+            }
+        }
+
         System.out.println("Please enter you feedback:");
         this.feedback=scanner.next();
     }

@@ -37,6 +37,9 @@ public class Menu {
             menuItems.get(i).display();
         }
     }
+    public int getSize(){
+        return this.menuItems.size();
+    }
 
     public Dish getDish(int num) {
         return menuItems.get(num);
