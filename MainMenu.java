@@ -222,6 +222,7 @@ public class MainMenu {
         boolean exitRequested = false;
 
         do {
+            //klnj
             System.out.println("1. Add Dish to Menu");
             System.out.println("2. Remove Dish from Menu");
             System.out.println("3. Update Dish Price");
@@ -231,7 +232,7 @@ public class MainMenu {
             System.out.print("Enter your choice: ");
 
             int choice = getValidIntegerInput(scanner);
-
+//kjjfvk
             switch (choice) {
                 case 1:
                     System.out.print("Enter dish name: ");
