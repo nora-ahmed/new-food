@@ -92,7 +92,7 @@ public class Order {
             System.out.println(" Please ensure that the payment process has been completed successfully.");
         }
     }
-//تالنغع
+
     public void DisplayOrder() {
 
         System.out.println("Thank you for choosing our service! your order will be ready for pickup on " + pick_up_order +"'\n' We appreciate your patience!");
@@ -102,7 +102,7 @@ public class Order {
         cart.display();
         System.out.println("----> Delivery Address : " + user.getDeliveryAddress());
         System.out.println("----> Delivery Time : " + selectedTime);
-       // System.out.println("----> Payment information :");
+        System.out.println("----> Payment information :");
         System.out.println("------> Payment Method: " + payment.getPaymentMethod());// i assumed the method names
 
 
