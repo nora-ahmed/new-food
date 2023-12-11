@@ -102,7 +102,7 @@ public class Order {
         cart.display();
         System.out.println("----> Delivery Address : " + user.getDeliveryAddress());
         System.out.println("----> Delivery Time : " + selectedTime);
-        System.out.println("----> Payment information :");
+       // System.out.println("----> Payment information :");
         System.out.println("------> Payment Method: " + payment.getPaymentMethod());// i assumed the method names
 
 

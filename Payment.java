@@ -80,6 +80,6 @@ public class Payment {
 
 
 
-        System.out.println("Credit card number entered: " + creditCardNumber);
+        System.out.println("Credit card number entered: " + CreditCardNumber);
     }
 }

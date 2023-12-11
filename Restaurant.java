@@ -43,7 +43,10 @@ public class Restaurant {
         return name;
 
     }
+public int getMenuSize(){
+        return this.menu.getSize();
 
+}
     public Menu getMenu()
     {
 

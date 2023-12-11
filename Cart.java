@@ -168,6 +168,8 @@ class Cart {
 
         if (this.items.isEmpty()) {
             cartDisplay.append("Your Cart is Empty.");
+
+
         } else {
             cartDisplay.append("Your Cart:\n");
             int counter = 1;
