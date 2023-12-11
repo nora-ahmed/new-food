@@ -222,6 +222,7 @@ public class MainMenu {
         boolean exitRequested = false;
 
         do {
+            //klnj
             System.out.println("1. Add Dish to Menu");
             System.out.println("2. Remove Dish from Menu");
             System.out.println("3. Update Dish Price");
