@@ -4,7 +4,6 @@ import java.io.FileNotFoundException;
 import java.util.concurrent.TimeUnit;
 import java.util.InputMismatchException;
 
-
 class Main {
 
   static List<Restaurant> restaurants=new ArrayList<>();

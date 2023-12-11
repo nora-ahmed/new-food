@@ -1,26 +1,27 @@
 import java.util.function.BooleanSupplier;
 
-public class User extends Person
-{
+public class User extends Person {
 
     private String deliveryAddress;
-   private Boolean isLogged =false;
+    private Boolean isLogged = false;
     public static int numberOfUser = 0;
 
+    User() {
+        numberOfUser++;
+    }
 
-User(){
-    numberOfUser++;
-}
-   User(String userName , String email , String password ,String deliveryAddress){
+    User(String userName, String email, String password, String deliveryAddress) {
 
         super.userName = userName;
         super.email = email;
         super.password = password;
         this.deliveryAddress = deliveryAddress;
     }
-public String getUsername(){
-    return this.userName;
-}
+
+    public String getUsername() {
+        return this.userName;
+    }
+
     public void setLogged() {
         isLogged = true;
     }
@@ -38,7 +39,8 @@ public String getUsername(){
         return deliveryAddress;
     }
 
-public String toString (){
-        return getUserName()+","+getEmail()+","+getPassword()+","+deliveryAddress;
-}
+    public String toString() {
+
+        return getUserName() + "," + getEmail() + "," + getPassword() + "," + deliveryAddress;
+    }
 }
