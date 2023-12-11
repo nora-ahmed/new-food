@@ -92,7 +92,7 @@ public class Order {
             System.out.println(" Please ensure that the payment process has been completed successfully.");
         }
     }
-
+//تالنغع
     public void DisplayOrder() {
 
         System.out.println("Thank you for choosing our service! your order will be ready for pickup on " + pick_up_order +"'\n' We appreciate your patience!");
